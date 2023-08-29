@@ -55,13 +55,17 @@ function goBattleBetweenTwoCharacters ([attacker, defender]) {
         const damage = attackerAttack - defenderDefense;
         characters[defender].health -= damage;
         console.log(`${characters[attacker].name} inflicts ${damage} damage points to ${characters[defender].name}`);
-        if (defender.health <= 0) {
+        if (characters[defender].health <= 0) {
             console.log(`!!!!!!! ${characters[defender].name} is dead !!!!!!!`);
+            characters.splice([defender], 1);
         }
-    }  
-        else {
-            console.log(`${characters[attacker].name} failed to inflcts damage to ${characters[defender].name}`)
-        }
+    } 
+    else {
+        console.log(`${characters[attacker].name} failed to inflcts damage to ${characters[defender].name}`);
+    }
 }
-console.log(goBattleBetweenTwoCharacters(getcharterAttackerAndDefender(characters)))
-// console.log(goBattleBetweenTwoCharacters(getcharterAttackerAndDefender(characters)))
+while (characters.length > 1) {
+console.log(goBattleBetweenTwoCharacters(getcharterAttackerAndDefender(characters)));
+console.table(characters);
+}
+console.log(`the winner is : ${characters[0].name}!!!!!!!!!!`);
