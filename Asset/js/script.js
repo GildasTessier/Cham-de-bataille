@@ -46,22 +46,21 @@ function goBattleBetweenTwoCharacters ([attacker, defender]) {
 
     const attackerAttack = characters[attacker].xp + Math.floor(Math.random() * (characters[attacker].weaponStrength +1));
     const defenderDefense = characters[defender].xp + Math.floor(Math.random() * (characters[defender].shieldPower +1));
-
+    
     console.log(`!!! Fight between ${characters[attacker].name} and ${characters[defender].name} !!!`);
     console.log(`${characters[attacker].name} attack with a score of ${attackerAttack} points.`);
     console.log(`${characters[defender].name} defense with a score of ${defenderDefense} points.`);
 
     if (attackerAttack > defenderDefense) {
-        const damage = attackerAttack - defenderDefense;
-        characters[defender].health -= damage;
-        console.log(`${characters[attacker].name} inflicts ${damage} damage points to ${characters[defender].name}`);
+        characters[defender].health -= attackerAttack;
+        console.log(`${characters[attacker].name} inflicts ${attackerAttack} damage points to ${characters[defender].name}`);
         if (characters[defender].health <= 0) {
-            console.log(`!!!!!!! ${characters[defender].name} is dead !!!!!!!`);
+            console.warn (`!!!!!!! ${characters[defender].name} is dead !!!!!!!`);
             characters.splice([defender], 1);
         }
     } 
     else {
-        console.log(`${characters[attacker].name} failed to inflcts damage to ${characters[defender].name}`);
+        return(`${characters[attacker].name} failed to inflcts damage to ${characters[defender].name}`);
     }
 }
 while (characters.length > 1) {
