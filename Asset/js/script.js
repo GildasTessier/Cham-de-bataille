@@ -29,6 +29,16 @@ const characters = [
         shieldPower: Math.floor(Math.random() * 10) +1,
     },
 ]
+// Function for find two charaters on random 
+function getcharterAttackerAndDefender (array) {
+    let attacker = Math.floor(Math.random() * characters.length);
+    let defender = Math.floor(Math.random() * characters.length);
+    while (defender === attacker ) {
+        defender = Math.floor(Math.random() * characters.length);
+    }
+    return (attacker, defender);
+}
+
 
 // Function to simulate a fight between two characters
 function goBattleBetweenTwoCharacters (attacker, defender) {
